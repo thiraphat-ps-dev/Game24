@@ -2,6 +2,14 @@ const express = require('express');
 const app = express();
 let port = 8000;
 
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,PATCH");
+  res.setHeader("Access-Control-Allow-Headers", "content-type,x-access-token");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
+
 app.get('/', function (req, res) {
   res.send('hello from node js');
 });
@@ -15,7 +23,7 @@ app.get('/game24', function (req, res) {
   // Get Operator for calculate
   var arrOperators = ['+', '-', '*', '/'];
   let arrOperatorsAll = [];
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 3000; i++) {
     var Operator = `${
       arrOperators[Math.floor(Math.random() * arrOperators.length)]
     }${arrOperators[Math.floor(Math.random() * arrOperators.length)]}${
